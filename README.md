@@ -29,3 +29,10 @@ The package exports three names:
 ## The awkward edge
 
 When the function is monotone on the interval, the minimum is at an endpoint. The algorithm still runs and returns a point very close to that endpoint, not exactly the endpoint, because it only ever evaluates interior points. If you need the exact endpoint, check `f(a)` and `f(b)` yourself and compare. The returned `x` is always an interior point that was actually evaluated, so `fx` is a real function value and not an interpolation.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
